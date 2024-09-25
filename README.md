@@ -26,6 +26,7 @@ The goal of this project is to create a functional Active Directory home lab env
 - **Splunk Universal Forwarder**: For collecting and forwarding logs from AD servers to Splunk.
 - **PowerShell**: For automating AD tasks, log forwarding, and system management.
 - **NAT**: Used for all the VMs to be under the same network.
+- **AtomicRedTeam**
 
 ## Steps
 **Create a Network Diagram**
@@ -38,6 +39,9 @@ The goal of this project is to create a functional Active Directory home lab env
 ![Screenshot 2024-09-23 103702](https://github.com/user-attachments/assets/908b89d9-451b-4038-96d2-6e5a088bc735)
 - You will need to install Microsoft Visual C++ redistribution package first before installing Virtualbox.
 ![image](https://github.com/user-attachments/assets/74426e10-74f8-4948-bc3a-db079f34a954)
+- Once Vitualbox is installed, you can go ahead and create the NAT address Clicking on Tools >> Network >> Select NAT Networks and create one to add the VMs to them.
+![Screenshot 2024-09-22 185141](https://github.com/user-attachments/assets/d54b5f4c-40a8-4d2d-b2bf-3dcf78b8570a)
+
 
  **Download & Install Windows 10 (SOC Analyst Machine)**
  - Download windows 10 ISO file to install windows 10 on the Virtualbox.
@@ -55,10 +59,15 @@ The goal of this project is to create a functional Active Directory home lab env
 - Create domain users, groups, and Organizational Units (OUs).
 
 **2. Download & Install Splunk**
-- Download: Get Splunk Enterprise from Splunk's website (free trial available).
+- Download: Get Splunk Enterprise(ubuntu server 22.04) from Splunk's website (free trial available).
 - Install: Install Splunk on the Virtualbox.
 - During installation, choose default settings for simplicity.
 - After installation, log in to Splunk Web and complete the setup.
+![Screenshot 2024-09-22 191032](https://github.com/user-attachments/assets/25b8a1e0-1890-4dd5-9278-0dd5ad608b57)
+- Configure Splunk IP addresses to the above using sudo nano /etc/netplan/50-cloud-init.yaml
+- After inputing the address you run "sudo netplan apply" to apply the settings
+- Run sudo apt-get unstall virtualbox-guest-additions-iso, then sudo reboot
+
 **Install Splunk Universal Forwarder:**
 - Download and install the Universal Forwarder on the AD server to collect AD logs.
 - Configure forwarder to send security event logs and Sysmon logs to the Splunk server.
@@ -75,6 +84,8 @@ The goal of this project is to create a functional Active Directory home lab env
 **Brute Forcing AD:**
 - Used crowbar to brute force AD credentials using RDP service.
 - Ensure to configure AD with weaker test accounts for simulation.
+![Screenshot 2024-09-22 141001](https://github.com/user-attachments/assets/bcb4ad62-a79b-44d7-bbc9-cc3cc95d4777)
+
 
 **5. Install and Configure Atomic Red Team for Attack Simulation**
 - Download: Clone the Atomic Red Team repository from GitHub.
